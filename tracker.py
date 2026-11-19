@@ -47,6 +47,32 @@ KARAOKE_RE = re.compile(
 )
 
 
+# --- "New song release" filter: everything else is dropped from the list ---
+MIN_CHANNEL_SUBS = int(os.environ.get("MIN_CHANNEL_SUBS", "20000"))  # ignore tiny/unknown uploaders
+NOT_A_SONG_RE = re.compile(
+    r"\bcover(s|ed)?\b|karaoke|instrumental|no vocals?|without vocals?|backing track|minus one|"
+    r"\bremix(ed)?\b|\bmashup\b|\bbootleg\b|slowed|reverb|sped[- ]?up|nightcore|8d audio|bass boosted|"
+    r"\bmix\b|\bplaylist\b|full album|\bcompilation\b|non[- ]?stop|\bjukebox\b|top \d+|best of|"
+    r"reaction|\breact\w*|review|tutorial|how to|lesson|piano version|guitar tab|"
+    r"live (at|in|on|from|session|performance)|\bconcert\b|behind the scenes|making of|interview|"
+    r"\btrailer\b|\bteaser\b|\bpodcast\b|\bshorts?\b|\bepisode\b|\bvlog\b|\bunboxing\b|"
+    r"ringtone|\bloop\b|\b1 hour\b|\b10 hours?\b|study music|lofi (mix|beats)|sleep music",
+    re.I,
+)
+
+
+def is_new_song(title, channel, tags, subs):
+    """True only for a normal song release (official-looking upload of a single track)."""
+    if NOT_A_SONG_RE.search(title):
+        return False
+    if re.search(r"\bfull (video|movie|film)\b|\bscene\b", title, re.I):
+        return False
+    # unknown / tiny channels are mostly re-uploads, fan edits and spam;
+    # "- Topic" auto-channels and VEVO are always real label uploads
+    official = channel.endswith("- Topic") or "vevo" in channel.lower() or "official" in channel.lower()
+    return official or subs >= MIN_CHANNEL_SUBS
+
+
 def api(endpoint, **params):
     params["key"] = os.environ["YOUTUBE_API_KEY"]
     url = API + endpoint + "?" + urllib.parse.urlencode(params)
@@ -260,6 +286,12 @@ def run_once():
             continue
         if sn.get("liveBroadcastContent") not in (None, "none"):
             continue
+        # Only genuine NEW SONG releases: drop covers, karaoke, remixes, mixes, reactions, etc.
+        if sn.get("categoryId") not in (None, "10"):
+            continue
+        ch_subs = subs.get(sn["channelId"], 0)
+        if not is_new_song(sn["title"], sn.get("channelTitle", ""), sn.get("tags"), ch_subs):
+            continue
         views = int(st.get("viewCount", 0))
         likes = int(st.get("likeCount", 0))
         comments = int(st.get("commentCount", 0))
@@ -270,7 +302,6 @@ def run_once():
             "SELECT ts, views FROM snapshots WHERE video_id=? ORDER BY ts", (vid,)
         ).fetchall()
 
-        ch_subs = subs.get(sn["channelId"], 0)
         args = ((now - published) / 3600, views, likes, comments, ch_subs, snaps)
         inputs[vid] = (args, published)
         score, vph, accel = compute_score(*args)
