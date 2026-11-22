@@ -1,45 +1,45 @@
 {
-  "generated_at": "2026-11-22T02:57:02.430412+00:00",
+  "generated_at": "2026-11-22T11:00:22.070299+00:00",
   "window_hours": 5.0,
   "regions": [
     "US"
   ],
   "songs": [
     {
-      "id": "xl0GJlXddEE",
-      "title": "♪ Yu (The Boxer) | Maquina de Treino | AniRap",
-      "channel": "AniRap",
-      "url": "https://www.youtube.com/watch?v=xl0GJlXddEE",
-      "thumbnail": "https://i.ytimg.com/vi/xl0GJlXddEE/mqdefault.jpg",
-      "age_min": 237,
-      "views": 98254,
-      "likes": 15106,
-      "comments": 928,
-      "subs": 2010000,
-      "views_per_hour": 24889,
+      "id": "VCA7GSxVjJU",
+      "title": "Deus preparou um reino para nós | (Mateus 25, 31-46) #2902 | Meditação da Palavra",
+      "channel": "Frei Gilson / Som do Monte - OFICIAL",
+      "url": "https://www.youtube.com/watch?v=VCA7GSxVjJU",
+      "thumbnail": "https://i.ytimg.com/vi/VCA7GSxVjJU/mqdefault.jpg",
+      "age_min": 180,
+      "views": 21969,
+      "likes": 11972,
+      "comments": 2064,
+      "subs": 10200000,
+      "views_per_hour": 7321,
       "acceleration": null,
       "karaoke_count": 0,
       "karaoke_links": [],
-      "opportunity": 69.9,
-      "score": 69.9
+      "opportunity": 62.6,
+      "score": 62.6
     },
     {
-      "id": "Rd5KFfsk3TY",
-      "title": "GTA666 Nerolink Ritual Exposed...",
-      "channel": "DOENUT FACTORY",
-      "url": "https://www.youtube.com/watch?v=Rd5KFfsk3TY",
-      "thumbnail": "https://i.ytimg.com/vi/Rd5KFfsk3TY/mqdefault.jpg",
-      "age_min": 205,
-      "views": 22451,
-      "likes": 952,
-      "comments": 170,
-      "subs": 158000,
-      "views_per_hour": 6579,
+      "id": "ciLo5k485LQ",
+      "title": "Novena de Nossa Senhora das Graças - 22/11 | Instituto Hesed",
+      "channel": "Ir Kelly Patricia OFICIAL / Instituto Hesed",
+      "url": "https://www.youtube.com/watch?v=ciLo5k485LQ",
+      "thumbnail": "https://i.ytimg.com/vi/ciLo5k485LQ/mqdefault.jpg",
+      "age_min": 120,
+      "views": 15351,
+      "likes": 9295,
+      "comments": 1328,
+      "subs": 5450000,
+      "views_per_hour": 7660,
       "acceleration": null,
       "karaoke_count": 0,
       "karaoke_links": [],
-      "opportunity": 64.8,
-      "score": 64.8
+      "opportunity": 62.5,
+      "score": 62.5
     }
   ]
 }
